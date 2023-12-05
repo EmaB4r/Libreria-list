@@ -52,9 +52,10 @@ node_t node_get_next(node_t node);
 //passato puntatore a un nodo restituisce quello che lo precede
 node_t node_get_prev(node_t node);
 
-//restituisce il valore puntato da un nodo, è necessario cast del puntatore
+//restituisce il valore puntato da un nodo, è consigliato cast del puntatore
 void * node_get_val(node_t node);
 
+//ancora da implementare
 void list_pop_node(node_t nodo);
 
 
