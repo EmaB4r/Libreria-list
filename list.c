@@ -14,7 +14,8 @@ typedef struct list {
 typedef struct node {
     node_t prev;
     node_t next;
-    int sorting_key;
+    int * sorting_key_int;
+    char **sorting_key_string;
     void* Item;
 }*node_t;
 
@@ -75,7 +76,8 @@ node_t node_crea(){
     nodo->next=NULL;
     nodo->prev=NULL;
     nodo->Item=NULL;
-    nodo->sorting_key=-1;
+    nodo->sorting_key_int=NULL;
+    nodo->sorting_key_string=NULL;
     return nodo;
 }
 
