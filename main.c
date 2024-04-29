@@ -1,77 +1,69 @@
 #include "list.h"
 #include <stdio.h>
-#include <string.h>
 
-typedef struct oggetto{
-    int a;
-    int b;
-    char c[50];
-}item_t;
+typedef struct Item
+{
+    int a, b, c
+}Item_t;
 
-void stampa_item(item_t * i){
-    i=(item_t*)i;
-    printf("Item: %s   a: %d   b: %d\n", i->c, i->a, i->b);
+
+
+void print_item(Item_t * i){
+    printf("a: %d   b: %d   c: %d\n", i->a, i->b, i->c);
 }
 
-int itemgreaterA(item_t* a, item_t* b){
-    return a->a>b->a;
+int item_a_gt(Item_t * i1, Item_t * i2){
+    return i1->a>i2->a;
 }
 
-int itemgreaterB(item_t* a, item_t* b){
-    return a->b>b->b;
+int item_b_gt(Item_t * i1, Item_t * i2){
+    return i1->b>i2->b;
 }
 
-int itemgreaterName(item_t* a, item_t* b){
-    int r= strcmp(a->c, b->c);
-    if(r==1)
-        return 1;
-    return 0;
+int item_c_gt(Item_t * i1, Item_t * i2){
+    return i1->c>i2->c;
 }
 
-int main(){
-    list_t lista= list_init();
-    item_t ogg1, ogg2, ogg3, ogg4, ogg5;
-    
-    ogg1.a=1;
-    ogg1.b=1;
-    strcpy(ogg1.c, "ogg1");
+void fill_item(Item_t* i, int a, int b, int c){
+    i->a=a;
+    i->b=b;
+    i->c=c;
+}
 
-    ogg2.a=1;
-    ogg2.b=2;
-    strcpy(ogg2.c, "ogg2");
+int main(int argc, char const *argv[]){
+    Item_t obj1, obj2, obj3, obj4, obj5, obj6, obj7;
+    fill_item(&obj1, 1,3,7);
+    fill_item(&obj2, 2,2,6);
+    fill_item(&obj3, 3,5,5);
+    fill_item(&obj4, 4,7,4);
+    fill_item(&obj5, 5,1,3);
+    fill_item(&obj6, 6,4,2);
+    fill_item(&obj7, 7,6,1);
 
-    ogg3.a=2;
-    ogg3.b=4;
-    strcpy(ogg3.c, "ogg3");
+    list_t lista=list_init();
+    list_ins_head(lista, &obj1);
+    list_ins_head(lista, &obj2);
+    list_ins_head(lista, &obj3);
+    list_ins_head(lista, &obj4);
+    list_ins_head(lista, &obj5);
+    list_ins_head(lista, &obj6);
+    list_ins_head(lista, &obj7);
 
-    ogg4.a=5;
-    ogg4.b=3;
-    strcpy(ogg4.c, "ogg4");
-
-    ogg5.a=9;
-    ogg5.b=2;
-    strcpy(ogg5.c, "ogg5");
-
-    list_ins_head(lista, &ogg1);
-    list_ins_head(lista, &ogg2);
-    list_ins_head(lista, &ogg3);
-    list_ins_head(lista, &ogg4);
-    list_ins_head(lista, &ogg5);
-
-    list_print(lista, stampa_item);
+    list_print(lista, print_item);
     printf("\n");
 
-    list_insertion_sort(lista, itemgreaterA);
-    list_print(lista, stampa_item);
+    list_insertion_sort(lista, item_a_gt);
+    list_print(lista, print_item);
     printf("\n");
 
-    list_insertion_sort(lista, itemgreaterB);
-    list_print(lista, stampa_item);
+    list_insertion_sort(lista, item_b_gt);
+    list_print(lista, print_item);
     printf("\n");
 
-    list_insertion_sort(lista, itemgreaterName);
-    list_print(lista, stampa_item);
+    list_insertion_sort(lista, item_c_gt);
+    list_print(lista, print_item);
     printf("\n");
+
     
     return 0;
 }
